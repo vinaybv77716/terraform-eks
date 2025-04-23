@@ -2,14 +2,14 @@ output "vpc_id"{
 value=module.vpc.vpc_id
 }
 
-output "subnet_ids-public"{
-  description = "List of private subnet IDs"
-  value       = module.vpc.private_subnets
+output "public_subnets"{
+  description = "List of public subnet IDs"
+  value       = module.vpc.public_subnets
 }
 
 output "private_subnets"{
-  description = "List of public subnet IDs"
-  value       = module.vpc.public_subnets
+  description = "List of private subnet IDs"
+  value       = module.vpc.private_subnets
 }
 
 output "eks_cluster_name" {
