@@ -64,3 +64,10 @@ module "eks" {
 #   db_username         = "myuser"
 #   db_password         = "mypassword123"
 # }
+
+resource "aws_eks_access_entry" "example" {
+  cluster_name       = "my-eks-cluster" # Replace with your cluster name
+  principal_arn      = "arn:aws:iam::200901485389:instance-profile/priya_ssm" # Replace with your IAM role ARN
+  kubernetes_groups = ["system:masters"] # Example Kubernetes group
+  type = "STANDARD"
+}
