@@ -67,7 +67,39 @@ module "eks" {
 
 resource "aws_eks_access_entry" "example" {
   cluster_name       = "my-eks-cluster" # Replace with your cluster name
-  principal_arn      = "arn:aws:iam::200901485389:instance-profile/priya_ssm" # Replace with your IAM role ARN
-  kubernetes_groups = ["system:masters"] # Example Kubernetes group
+  principal_arn      = "arn:aws:iam::200901485389:role/priya_ssm" # Replace with your IAM role ARN
   type = "STANDARD"
+}
+
+
+resource "aws_eks_access_policy_association" "eks_access_admin" {
+  cluster_name  = "my-eks-cluster"
+  principal_arn = "arn:aws:iam::200901485389:role/priya_ssm"
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSAdminPolicy"
+
+  access_scope {
+    type = "cluster"
+  }
+}
+
+
+
+
+
+
+resource "aws_eks_access_entry" "example2" {
+  cluster_name       = "my-eks-cluster" # Replace with your cluster name
+  principal_arn      = "arn:aws:iam::200901485389:user/project-ciq-poc" # Replace with your IAM role ARN
+  type = "STANDARD"
+}
+
+
+resource "aws_eks_access_policy_association" "eks_access_admin2" {
+  cluster_name  = "my-eks-cluster"
+  principal_arn = "arn:aws:iam::200901485389:user/project-ciq-poc"
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSAdminPolicy"
+
+  access_scope {
+    type = "cluster"
+  }
 }
