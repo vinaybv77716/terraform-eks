@@ -1,5 +1,6 @@
 #!/bin/bash
 
+terraforminstall(){
  if ! command -v terraform &> /dev/null
           then
             echo "Terraform not found. Installing Terraform..."
@@ -10,8 +11,10 @@
           else
             echo "Terraform is already installed"
           fi
+}
 
 
+dockerinstall(){
  if ! command -v docker &> /dev/null
           then
             echo "Docker not found. Installing Docker..."
@@ -28,8 +31,10 @@
           else
             echo "Docker is already installed"
           fi
+}
 
 
+awsinstall(){
    if ! command -v aws &> /dev/null
           then
             echo "AWS CLI not found. Installing AWS CLI..."
@@ -40,9 +45,11 @@
           else
             echo "AWS CLI is already installed"
           fi  
+}
 
 
- echo "#######   kubectl    ######"
+kubectlinstall(){
+
           if ! command -v kubectl &> /dev/null; then
             echo "kubectl not found. Installing..."
             curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
@@ -51,7 +58,10 @@
           else
             echo "kubectl is already installed: $(kubectl version --short --client)"
           fi
+}
 
+
+eksctlinstall(){
  echo "#######   eksctl    ######"
          if ! command -v eksctl &> /dev/null; then
          echo "eksctl not found. Installing..."
@@ -59,7 +69,11 @@
          sudo mv /tmp/eksctl /usr/local/bin
          else
          echo "eksctl is already installed: $(eksctl version)"
-         fi                    
+         fi    
+
+}
+
+helm(){
  echo "#######   Checking Helm   ######"
           if ! command -v helm &> /dev/null; then
             echo "Helm not found. Installing..."
@@ -78,6 +92,13 @@
             helm repo add eks https://aws.github.io/eks-charts
           fi
           helm repo update
+}
 
-      
-                
+terraforminstall
+dockerinstall
+awsinstall
+kubectlinstall
+eksctlinstall
+#helm
+
+
