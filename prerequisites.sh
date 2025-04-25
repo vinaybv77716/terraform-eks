@@ -94,11 +94,11 @@ helm(){
           helm repo update
 }
 
-terraforminstall
-dockerinstall
-awsinstall
-kubectlinstall
-eksctlinstall
+#terraforminstall
+#dockerinstall
+#awsinstall
+#kubectlinstall
+#eksctlinstall
 #helm
 
 
