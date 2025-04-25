@@ -60,3 +60,24 @@
          else
          echo "eksctl is already installed: $(eksctl version)"
          fi                    
+ echo "#######   Checking Helm   ######"
+          if ! command -v helm &> /dev/null; then
+            echo "Helm not found. Installing..."
+             curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+             chmod 700 get_helm.sh
+             ./get_helm.sh
+          else
+            echo "Helm already installed: $(helm version --short)"
+          fi
+
+  echo "#######   Helm repo check   ######"
+          if helm repo list | grep -q '^eks'; then
+            echo "EKS Helm repo already exists"
+          else
+            echo "Adding EKS Helm repo"
+            helm repo add eks https://aws.github.io/eks-charts
+          fi
+          helm repo update
+
+      
+                
